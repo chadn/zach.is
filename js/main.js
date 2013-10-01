@@ -1,3 +1,4 @@
+// redefine the autocomplete filter to only match from the beginning of a word
 $.ui.autocomplete.filter = function (array, term) {
     var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(term), "i");
     return $.grep(array, function (value) {
@@ -6,6 +7,8 @@ $.ui.autocomplete.filter = function (array, term) {
 };
 
 $(function() {
+
+  // create the autocomplete source array
   var alpha = [
     'alpha',
     'bravo',
@@ -35,9 +38,12 @@ $(function() {
     'zulu'
   ];
 
+  // initialize the autocomplete
   $('#1').autocomplete({
     minLength: 0,
     source: alpha
   });
+
+  // automatically open the autocomplete
   $('#1').autocomplete('search', '');
 });
