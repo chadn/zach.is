@@ -35,6 +35,7 @@ $(function() {
     'zulu'
   ];
   $( "#1" ).autocomplete({
+    minLength: 0,
     source: alpha
   });
 });
