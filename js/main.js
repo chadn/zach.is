@@ -31,7 +31,12 @@ $(function() {
       search: function(e, ui) { console.log('Searched! (autocomplete)') },
       select: function(e, ui) {
         console.log('Selected! (autocomplete)');
+        // set the input width relative to the selected content
         $el.css('width', $('#hiddenInput').html(ui.item.value).width());
+        // create another input and set up
+        var newId = id + 1;
+        $('<input>').attr('id', newId).appendTo('.ui-widget');
+        setupAutocomplete(newId);
       }
     });
 
