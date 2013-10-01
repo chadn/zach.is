@@ -44,13 +44,19 @@ $(function() {
     source: alpha,
     change: function(e, ui) { console.log('Changed! (autocomplete)') },
     close: function(e, ui) { console.log('Closed! (autocomplete)') },
-    create: function(e, ui) { console.log('Created! (autocomplete)') },
-    focus: function(e, ui) { console.log('Focused! (autocomplete)') },
+    create: function(e, ui) { 
+      console.log('Created! (autocomplete)');
+      $('#1').attr('placeholder', alpha[0]);
+    },
+    focus: function(e, ui) {
+      console.log('Focused! (autocomplete)');
+      // return false; // this will prevent the placeholder from being populated with the focused item
+    },
     open: function(e, ui ) { console.log('Opened! (autocomplete)') },
     response: function(e, ui) { console.log('Responsed! (autocomplete)') },
     search: function(e, ui) { console.log('Searched! (autocomplete)') },
     select: function(e, ui) {
-      console.log('Selected! (autocomplete)')
+      console.log('Selected! (autocomplete)');
     }
   });
 
