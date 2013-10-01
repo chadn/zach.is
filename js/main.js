@@ -41,7 +41,15 @@ $(function() {
   // initialize the autocomplete
   $('#1').autocomplete({
     minLength: 0,
-    source: alpha
+    source: alpha,
+    change: function(e, ui) { console.log('Changed! (autocomplete)') },
+    close: function(e, ui) { console.log('Closed! (autocomplete)') },
+    create: function(e, ui) { console.log('Created! (autocomplete)') },
+    focus: function(e, ui) { console.log('Focused! (autocomplete)') },
+    open: function(e, ui ) { console.log('Opened! (autocomplete)') },
+    response: function(e, ui) { console.log('Responsed! (autocomplete)') },
+    search: function(e, ui) { console.log('Searched! (autocomplete)') },
+    select: function(e, ui) { console.log('Selected! (autocomplete)') }
   });
 
   // automatically open the autocomplete
