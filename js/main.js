@@ -41,9 +41,9 @@ $(function() {
 
   setupAutocomplete(1);
 
-  $('#1').on('focus', function(){
-    $('#1').val('');
-    $('#1').autocomplete('search', '');
+  $('.ui-autocomplete-input').on('focus', function(){
     console.log('Focused! (element)');
+    $(this).val('');
+    $(this).autocomplete('search', '');
   })
 });
