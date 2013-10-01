@@ -1,11 +1,3 @@
-// redefine the autocomplete filter to only match from the beginning of a word
-$.ui.autocomplete.filter = function (array, term) {
-    var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(term), "i");
-    return $.grep(array, function (value) {
-        return matcher.test(value.label || value.value || value);
-    });
-};
-
 $(function() {
 
   var setupAutocomplete = function(id) {
@@ -15,9 +7,16 @@ $(function() {
     // initialize the autocomplete
     $el.autocomplete({
       minLength: 0,
-      source: alpha,
-      change: function(e, ui) { console.log('Changed! (autocomplete)') },
-      close: function(e, ui) { console.log('Closed! (autocomplete)') },
+      // custom matcher to only look at the beginning of the string
+      source: function( request, response ) {
+        var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
+        response( $.grep( alpha, function( item ){
+            return matcher.test( item );
+          })
+        );
+      },
+      //change: function(e, ui) { console.log('Changed! (autocomplete)') },
+      //close: function(e, ui) { console.log('Closed! (autocomplete)') },
       create: function(e, ui) { 
         console.log('Created! (autocomplete)');
         $el.attr('placeholder', alpha[0]);
@@ -26,13 +25,14 @@ $(function() {
         console.log('Focused! (autocomplete)');
         // return false; // this will prevent the placeholder from being populated with the focused item
       },
-      open: function(e, ui ) { console.log('Opened! (autocomplete)') },
-      response: function(e, ui) { console.log('Responsed! (autocomplete)') },
-      search: function(e, ui) { console.log('Searched! (autocomplete)') },
+      //open: function(e, ui ) { console.log('Opened! (autocomplete)') },
+      //response: function(e, ui) { console.log('Responsed! (autocomplete)') },
+      //search: function(e, ui) { console.log('Searched! (autocomplete)') },
       select: function(e, ui) {
         console.log('Selected! (autocomplete)');
         // set the input width relative to the selected content
         $el.css('width', $('#hiddenInput').html(ui.item.value).width());
+        this.value = ui.item.value + ' /';
         // create another input and set up
         var newId = id + 1;
         $('<input>').attr('id', newId).appendTo('.ui-widget');
@@ -42,6 +42,7 @@ $(function() {
 
     // automatically open the autocomplete
     $el.autocomplete('search', '');
+    $el.focus();
 
   }
 
@@ -57,7 +58,7 @@ $(function() {
       }
     });
 
-    $(this).val('');
+    $(this).val('').attr('style','');
     $(this).autocomplete('search', '');
   });
 
