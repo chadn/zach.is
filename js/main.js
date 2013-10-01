@@ -34,8 +34,10 @@ $(function() {
     'yankee',
     'zulu'
   ];
-  $( "#1" ).autocomplete({
+
+  $('#1').autocomplete({
     minLength: 0,
     source: alpha
   });
+  $('#1').autocomplete('search', '');
 });
