@@ -45,11 +45,22 @@ $(function() {
 
   }
 
-  setupAutocomplete(1);
-
-  $('.ui-autocomplete-input').on('focus', function(){
+  $('form').on('focus', '.ui-autocomplete-input', function(){
     console.log('Focused! (element)');
+
+    var focusedId = parseInt($(this).attr('id'));
+
+    $('.ui-autocomplete-input').each(function(){
+      var thisId = parseInt($(this).attr('id'));
+      if (thisId > focusedId) {
+        $(this).remove();
+      }
+    });
+
     $(this).val('');
     $(this).autocomplete('search', '');
-  })
+  });
+
+  setupAutocomplete(1);
+
 });
