@@ -20,7 +20,7 @@ $(function() {
       close: function(e, ui) { console.log('Closed! (autocomplete)') },
       create: function(e, ui) { 
         console.log('Created! (autocomplete)');
-        $('#1').attr('placeholder', alpha[0]);
+        $el.attr('placeholder', alpha[0]);
       },
       focus: function(e, ui) {
         console.log('Focused! (autocomplete)');
@@ -31,6 +31,7 @@ $(function() {
       search: function(e, ui) { console.log('Searched! (autocomplete)') },
       select: function(e, ui) {
         console.log('Selected! (autocomplete)');
+        $el.css('width', $('#hiddenInput').html(ui.item.value).width());
       }
     });
 
