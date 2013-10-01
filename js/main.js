@@ -23,7 +23,7 @@ $(function() {
     "Scala",
     "Scheme"
   ];
-  $( "#tags" ).autocomplete({
+  $( "#1" ).autocomplete({
     source: availableTags
   });
 });
