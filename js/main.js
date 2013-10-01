@@ -49,9 +49,17 @@ $(function() {
     open: function(e, ui ) { console.log('Opened! (autocomplete)') },
     response: function(e, ui) { console.log('Responsed! (autocomplete)') },
     search: function(e, ui) { console.log('Searched! (autocomplete)') },
-    select: function(e, ui) { console.log('Selected! (autocomplete)') }
+    select: function(e, ui) {
+      console.log('Selected! (autocomplete)')
+    }
   });
 
   // automatically open the autocomplete
   $('#1').autocomplete('search', '');
+
+  $('#1').on('focus', function(){
+    $('#1').val('');
+    $('#1').autocomplete('search', '');
+    console.log('Focused! (element)');
+  })
 });
