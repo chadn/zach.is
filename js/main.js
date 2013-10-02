@@ -39,6 +39,8 @@ $(function() {
       create: function(e, ui) { 
         if (data.length < 1) {
           console.log('End of route!'); 
+          var currentRoute = getCurrentRoute();
+          history.pushState({}, '', '/' + currentRoute);
           $el.remove();
           $('.ui-autocomplete-input').blur();
         } else {
@@ -57,7 +59,6 @@ $(function() {
         var newId = id + 1;
         $('<input>').attr('id', newId).appendTo('.ui-widget');
         var currentRoute = getCurrentRoute();
-        history.pushState({}, '', '/' + currentRoute);
         var newData = Routes.getChildrenOfNodeByName(currentRoute);
         var newDataArray = _.map(newData, function(item) { return item.label + ' /'; });
         console.log(launchRoute.length);
@@ -75,6 +76,8 @@ $(function() {
   }
 
   $('form').on('focus', '.ui-autocomplete-input', function(){
+
+    console.log('Focused! (element)');
 
     var focusedId = parseInt($(this).attr('id'));
 
@@ -98,6 +101,7 @@ $(function() {
   var firstLevel = Routes.getFirstLevelData();
   var firstLevelArray = _.map(firstLevel, function(item) { return item.label + ' /'; });
   setupAutocomplete(1, firstLevelArray);
-  selectItem(1, launchRoute[0]);
-
+  if (launchRoute.length > 0) {
+    selectItem(1, launchRoute[0]);
+  }
 });
