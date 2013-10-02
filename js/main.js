@@ -1,8 +1,18 @@
 $(function() {
 
+  var getCurrentRoute = function() {
+    var currentRoute = []
+    $('.ui-autocomplete-input').each(function(){
+      currentRoute.push($(this).val().replace(' ',''));
+    });
+    currentRoute = currentRoute.join('');
+    console.log(currentRoute);
+    return currentRoute;
+  }
+
   var setupAutocomplete = function(id, data) {
 
-    var $el = $('#' + id); 
+    var $el = $('#' + id);
 
     // initialize the autocomplete
     $el.autocomplete({
@@ -42,12 +52,8 @@ $(function() {
         // create another input and set up
         var newId = id + 1;
         $('<input>').attr('id', newId).appendTo('.ui-widget');
-        var currentRoute = []
-        $('.ui-autocomplete-input').each(function(){
-          currentRoute.push($(this).val().replace(' ',''));
-        });
-        currentRoute = currentRoute.join('');
-        console.log(currentRoute);
+        var currentRoute = getCurrentRoute();
+        history.pushState({}, '', '/' + currentRoute);
         var newData = Routes.getChildrenOfNodeByName(currentRoute);
         var newDataArray = _.map(newData, function(item) { return item.label + ' /'; });
         setupAutocomplete(newId, newDataArray);
@@ -76,6 +82,9 @@ $(function() {
     $(this).val('')
     $(this).attr('style', '')    
     $(this).autocomplete('search', '');
+
+    var currentRoute = getCurrentRoute();
+    history.pushState({}, '', '/' + currentRoute);
 
   });
 
