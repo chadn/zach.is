@@ -1,5 +1,16 @@
 $(function() {
 
+  var launchRoute = []
+  // var launchRoute = ['reading /', 'articles /', 'about /', 'cities /']
+
+  var selectItem = function(id, value) {
+    var $el = $('a:contains(' + value + ')');
+    console.log($el);
+    $el.trigger('click');
+    launchRoute.shift();
+    // console.log(launchRoute);
+  }
+
   var getCurrentRoute = function() {
     var currentRoute = []
     $('.ui-autocomplete-input').each(function(){
@@ -27,11 +38,11 @@ $(function() {
       },
       create: function(e, ui) { 
         if (data.length < 1) {
-          // console.log('End of route!'); 
+          console.log('End of route!'); 
           $el.remove();
           $('.ui-autocomplete-input').blur();
         } else {
-          $el.attr('placeholder', data[0]);          
+          //$el.attr('placeholder', data[0]);          
         }
       },
       focus: function(e, ui) {
@@ -49,7 +60,11 @@ $(function() {
         history.pushState({}, '', '/' + currentRoute);
         var newData = Routes.getChildrenOfNodeByName(currentRoute);
         var newDataArray = _.map(newData, function(item) { return item.label + ' /'; });
+        console.log(launchRoute.length);
         setupAutocomplete(newId, newDataArray);
+        if (launchRoute.length > 0) {
+          selectItem(newId, launchRoute[newId - 1]);
+        }
       }
     });
 
@@ -60,8 +75,6 @@ $(function() {
   }
 
   $('form').on('focus', '.ui-autocomplete-input', function(){
-
-    console.log('Focused! (element)');
 
     var focusedId = parseInt($(this).attr('id'));
 
@@ -85,5 +98,6 @@ $(function() {
   var firstLevel = Routes.getFirstLevelData();
   var firstLevelArray = _.map(firstLevel, function(item) { return item.label + ' /'; });
   setupAutocomplete(1, firstLevelArray);
+  selectItem(1, launchRoute[0]);
 
 });

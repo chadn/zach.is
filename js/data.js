@@ -32,6 +32,22 @@ var Routes = {};
 
 Routes.routes = [
     {
+        route: 'up/',
+        label: 'up',
+        children: [
+            {
+                route: 'up/and/',
+                label: 'and',
+                children: [
+                    {
+                        route: 'up/and/running',
+                        label: 'running'
+                    }
+                ]
+            }
+        ]
+    },
+    {
         route: 'making/',
         label: 'making',
         children: [
