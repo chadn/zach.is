@@ -43,6 +43,11 @@ $(function() {
           history.pushState({}, '', '/' + currentRoute);
           $el.remove();
           $('.ui-autocomplete-input').blur();
+          $('#mainContent').attr('src', 'http://wired.heineman.info');
+          $('iframe').load(function() {
+            console.log('iframe loaded!');
+            $('#mainContent').css('opacity', 1);
+          });
         } else {
           //$el.attr('placeholder', data[0]);          
         }
@@ -78,6 +83,8 @@ $(function() {
   $('form').on('focus', '.ui-autocomplete-input', function(){
 
     console.log('Focused! (element)');
+
+    $('#mainContent').css('opacity', 0);
 
     var focusedId = parseInt($(this).attr('id'));
 
