@@ -1,6 +1,6 @@
 $(function() {
 
-  var setupAutocomplete = function(id) {
+  var setupAutocomplete = function(id, data) {
 
     var $el = $('#' + id); 
 
@@ -10,7 +10,7 @@ $(function() {
       // custom matcher to only look at the beginning of the string
       source: function( request, response ) {
         var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
-        response( $.grep( alpha, function( item ){
+        response( $.grep( data, function( item ){
             return matcher.test( item );
           })
         );
@@ -19,7 +19,7 @@ $(function() {
       //close: function(e, ui) { console.log('Closed! (autocomplete)') },
       create: function(e, ui) { 
         console.log('Created! (autocomplete)');
-        $el.attr('placeholder', alpha[0]);
+        $el.attr('placeholder', data[0]);
       },
       focus: function(e, ui) {
         console.log('Focused! (autocomplete)');
@@ -36,7 +36,8 @@ $(function() {
         // create another input and set up
         var newId = id + 1;
         $('<input>').attr('id', newId).appendTo('.ui-widget');
-        setupAutocomplete(newId);
+        var newData = data;
+        setupAutocomplete(newId, newData);
       }
     });
 
@@ -65,6 +66,6 @@ $(function() {
 
   });
 
-  setupAutocomplete(1);
+  setupAutocomplete(1, alpha);
 
 });
