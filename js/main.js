@@ -47,6 +47,7 @@ $(function() {
   }
 
   $('form').on('focus', '.ui-autocomplete-input', function(){
+
     console.log('Focused! (element)');
 
     var focusedId = parseInt($(this).attr('id'));
@@ -58,8 +59,10 @@ $(function() {
       }
     });
 
-    $(this).val('').attr('style','');
+    $(this).val('')
+    $(this).attr('style', '')    
     $(this).autocomplete('search', '');
+
   });
 
   setupAutocomplete(1);

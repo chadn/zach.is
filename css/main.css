@@ -1,0 +1,46 @@
+body {
+  overflow: hidden;
+}
+ui-widget {
+	position: relative;
+	left: 100px;
+	top: 20px;
+}
+label, input, .ui-autocomplete, #hiddenInput {
+  font-family: 'Sentinel SSm A', 'Sentinel SSm B' !important;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 26px !important;
+  border: none;
+  z-index: -1;
+  box-sizing:border-box;
+  -moz-box-sizing:border-box; /* Firefox */
+  /*pointer-events: none;*/
+}
+.ui-autocomplete li a {
+  color: #bbb;
+}
+.ui-autocomplete {
+  /*top: 4px !important;*/
+  /*left: 154px !important;*/
+}
+.ui-state-focus {
+  border: none !important;
+  background: none !important;
+  margin: 0;
+}
+.ui-menu {
+  margin: 0;
+  padding: 0;
+}
+.ui-menu-item {
+  height: 32px;
+}
+input {
+  outline: none;
+  /*border: 1px solid red;*/
+  background: rgba(0,0,0,0);
+  font-weight: normal;
+  padding: 0;
+  margin-left: -8px;
+}
