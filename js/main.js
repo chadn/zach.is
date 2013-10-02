@@ -6,7 +6,7 @@ $(function() {
       currentRoute.push($(this).val().replace(' ',''));
     });
     currentRoute = currentRoute.join('');
-    console.log(currentRoute);
+    // console.log('Current route = ' + currentRoute);
     return currentRoute;
   }
 
@@ -25,12 +25,9 @@ $(function() {
           })
         );
       },
-      // change: function(e, ui) { console.log('Changed! (autocomplete)') },
-      // close: function(e, ui) { console.log('Closed! (autocomplete)') },
       create: function(e, ui) { 
-        // console.log('Created! (autocomplete)');
         if (data.length < 1) {
-          console.log('End of route!');
+          // console.log('End of route!'); 
           $el.remove();
           $('.ui-autocomplete-input').blur();
         } else {
@@ -38,12 +35,8 @@ $(function() {
         }
       },
       focus: function(e, ui) {
-        // console.log('Focused! (autocomplete)');
         // return false; // this will prevent the placeholder from being populated with the focused item
       },
-      // open: function(e, ui ) { console.log('Opened! (autocomplete)') },
-      // response: function(e, ui) { console.log('Responsed! (autocomplete)') },
-      // search: function(e, ui) { console.log('Searched! (autocomplete)') },
       select: function(e, ui) {
         // console.log('Selected! (autocomplete)');
         // set the input width relative to the selected content
