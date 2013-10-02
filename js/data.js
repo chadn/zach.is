@@ -32,11 +32,11 @@ var Routes = {};
 
 Routes.routes = [
     {
-        route: 'making',
+        route: 'making/',
         label: 'making',
         children: [
             {
-                route: 'making/this',
+                route: 'making/this/',
                 label: 'this',
                 children: [
                     {
@@ -48,11 +48,11 @@ Routes.routes = [
         ]
     },
     {
-        route: 'working',
+        route: 'working/',
         label: 'working',
         children: [
             {
-                route: 'working/for',
+                route: 'working/for/',
                 label: 'for',
                 children: [
                     {
@@ -70,7 +70,7 @@ Routes.routes = [
                 ]
             },
             {
-                route: 'working/with',
+                route: 'working/with/',
                 label: 'with',
                 children: [
                     {
@@ -98,11 +98,11 @@ Routes.routes = [
         ]
     },
     {
-        route: 'eating',
+        route: 'eating/',
         label: 'eating',
         children: [
             {
-                route: 'eating/at',
+                route: 'eating/at/',
                 label: 'at',
                 children: [
                     {
@@ -116,7 +116,7 @@ Routes.routes = [
                 ]
             },
             {
-                route: 'eating/on',
+                route: 'eating/on/',
                 label: 'on',
                 children: [
                     {
@@ -128,15 +128,15 @@ Routes.routes = [
         ]
     },
     {
-        route: 'reading',
+        route: 'reading/',
         label: 'reading',
         children: [
             {
-                route: 'reading/articles',
+                route: 'reading/articles/',
                 label: 'articles',
                 children: [
                     {
-                        route: 'reading/articles/about',
+                        route: 'reading/articles/about/',
                         label: 'about',
                         children: [
                             {
@@ -162,7 +162,7 @@ Routes.routes = [
                         ]
                     },
                     {
-                        route: 'reading/articles/from',
+                        route: 'reading/articles/from/',
                         label: 'from',
                         children: [
                             {
@@ -190,32 +190,32 @@ Routes.routes = [
                 ]
             },
             {
-                route: 'reading/books',
+                route: 'reading/books/',
                 label: 'books',
                 children: [
                     {
-                        route: 'reading/books/by',
+                        route: 'reading/books/by/',
                         label: 'by',
                         children: [
                             {
-                                route: 'reading/books/by/wayne-congar', 
-                                label: 'wayne-congar'
+                                route: 'reading/books/by/abraham-lincoln', 
+                                label: 'abraham-lincoln'
                             },
                             {
-                                route: 'reading/books/by/brendan-bilko', 
-                                label: 'brendan-bilko'
+                                route: 'reading/books/by/john-grisham', 
+                                label: 'john-grisham'
                             },
                             {
-                                route: 'reading/books/by/caleb-linville', 
-                                label: 'caleb-linville'
+                                route: 'reading/books/by/stephen-king', 
+                                label: 'stephen-king'
                             },
                             {
-                                route: 'reading/books/by/justin-edmund', 
-                                label: 'justin-edmund'
+                                route: 'reading/books/by/jane-austen', 
+                                label: 'jane-austen'
                             },
                             {
-                                route: 'reading/books/by/cat-lee', 
-                                label: 'cat-lee'
+                                route: 'reading/books/by/j-k-rowling', 
+                                label: 'j-k-rowling'
                             }
                         ]
                     }
@@ -224,35 +224,35 @@ Routes.routes = [
         ]
     },
     {
-        route: 'playing',
+        route: 'playing/',
         label: 'playing'
     },
     {
-        route: 'on',
+        route: 'on/',
         label: 'on'
     },
     {
-        route: 'in',
+        route: 'in/',
         label: 'in'
     },
     {
-        route: 'on-top-of',
+        route: 'on-top-of/',
         label: 'on-top-of'
     },
     {
-        route: 'cooking',
+        route: 'cooking/',
         label: 'cooking'
     },
     {
-        route: 'pinning',
+        route: 'pinning/',
         label: 'pinning'
     },
     {
-        route: 'instagramming',
+        route: 'instagramming/',
         label: 'instagramming'
     },
     {
-        route: 'looking',
+        route: 'looking/',
         label: 'looking'
     }
 ];
@@ -266,8 +266,8 @@ Routes.getFirstLevelData = function(nodes) {
 
     $.each(nodes, function() {
         var node = {
-            label: this.label,
-            id: this.id
+            route: this.route,
+            label: this.label
         };
 
         if (this.children) {
@@ -284,27 +284,29 @@ Routes.getChildrenOfNodeByName = function(node_name) {
     var result = null;
 
     function iterate(nodes) {
-        $.each(nodes, function() {
-            if (result) {
-                return;
-            }
-            else {
-                if (this.label == node_name) {
-                    result = this;
-                }
+      $.each(nodes, function() {
+        if (result) {
+          return;
+        }
+        else {
+          if (this.route == node_name) {
+            result = this;
+          }
 
-                if (this.children) {
-                    iterate(this.children);
-                }
-            }
-        });
+          if (this.children) {
+            iterate(this.children);
+          }
+        }
+      });
     }
 
     iterate(Routes.routes);
 
-    if(typeof result.children != 'undefined') {
-        return Routes.getFirstLevelData(result.children);
+    if (!result) {
+      return;
+    } else if (typeof result.children != 'undefined') {
+      return Routes.getFirstLevelData(result.children);
     } else {
-        return null;
+      return null;
     }
 }

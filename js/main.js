@@ -15,29 +15,42 @@ $(function() {
           })
         );
       },
-      //change: function(e, ui) { console.log('Changed! (autocomplete)') },
-      //close: function(e, ui) { console.log('Closed! (autocomplete)') },
+      // change: function(e, ui) { console.log('Changed! (autocomplete)') },
+      // close: function(e, ui) { console.log('Closed! (autocomplete)') },
       create: function(e, ui) { 
-        console.log('Created! (autocomplete)');
-        $el.attr('placeholder', data[0]);
+        // console.log('Created! (autocomplete)');
+        if (data.length < 1) {
+          console.log('End of route!');
+          $el.remove();
+          $('.ui-autocomplete-input').blur();
+        } else {
+          $el.attr('placeholder', data[0]);          
+        }
       },
       focus: function(e, ui) {
-        console.log('Focused! (autocomplete)');
+        // console.log('Focused! (autocomplete)');
         // return false; // this will prevent the placeholder from being populated with the focused item
       },
-      //open: function(e, ui ) { console.log('Opened! (autocomplete)') },
-      //response: function(e, ui) { console.log('Responsed! (autocomplete)') },
-      //search: function(e, ui) { console.log('Searched! (autocomplete)') },
+      // open: function(e, ui ) { console.log('Opened! (autocomplete)') },
+      // response: function(e, ui) { console.log('Responsed! (autocomplete)') },
+      // search: function(e, ui) { console.log('Searched! (autocomplete)') },
       select: function(e, ui) {
-        console.log('Selected! (autocomplete)');
+        // console.log('Selected! (autocomplete)');
         // set the input width relative to the selected content
         $el.css('width', $('#hiddenInput').html(ui.item.value).width());
-        this.value = ui.item.value + ' /';
+        this.value = ui.item.value;
         // create another input and set up
         var newId = id + 1;
         $('<input>').attr('id', newId).appendTo('.ui-widget');
-        var newData = data;
-        setupAutocomplete(newId, newData);
+        var currentRoute = []
+        $('.ui-autocomplete-input').each(function(){
+          currentRoute.push($(this).val().replace(' ',''));
+        });
+        currentRoute = currentRoute.join('');
+        console.log(currentRoute);
+        var newData = Routes.getChildrenOfNodeByName(currentRoute);
+        var newDataArray = _.map(newData, function(item) { return item.label + ' /'; });
+        setupAutocomplete(newId, newDataArray);
       }
     });
 
@@ -66,6 +79,9 @@ $(function() {
 
   });
 
-  setupAutocomplete(1, alpha);
+  // setup the intial autocomplete on page load
+  var firstLevel = Routes.getFirstLevelData();
+  var firstLevelArray = _.map(firstLevel, function(item) { return item.label + ' /'; });
+  setupAutocomplete(1, firstLevelArray);
 
 });
