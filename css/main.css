@@ -4,6 +4,15 @@ body {
   padding: 0;
 }
 
+form {
+  padding: 18px 0 0 88px;
+  /*height: 80px;*/
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+  background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+  background: -o-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+}
+
 iframe {
   position: absolute;
   width: 100%;
@@ -22,7 +31,7 @@ ui-widget {
 	left: 100px;
 	top: 20px;
 }
-label, input, .ui-autocomplete, #hiddenInput {
+label, input, .ui-autocomplete, #hiddenInput, #progress {
   font-family: 'Sentinel SSm A', 'Sentinel SSm B' !important;
   font-weight: 700;
   font-style: normal;
@@ -59,4 +68,50 @@ input {
   font-weight: normal;
   padding: 0;
   margin-left: -8px;
+}
+
+#progress 
+{
+    color: #bbb;
+    /*font-size: 18px;*/
+    /*margin: 80px auto;*/
+    /*width: 200px;*/
+    display: inline-block;
+    -webkit-transition: opacity 0.15s ease-in-out;
+    opacity: 0;
+}
+
+#progress ul {
+  margin: 0;
+}
+
+.msg {
+    display: inline-block;
+}
+
+.dot {
+    display: inline-block;
+    border-radius: 1px;
+    background-color: #bbb;
+    -webkit-animation: dot 1.5s infinite;
+    margin-right: 4px;
+}
+
+.one {
+    -webkit-animation-delay: 0.0s;
+}
+
+.two {
+    -webkit-animation-delay: 0.5s;
+}
+
+.three {
+    -webkit-animation-delay: 1.0s;
+}
+
+@-webkit-keyframes dot {
+     0% { width: 3px; height: 3px; margin-right: 3px; }
+    25% { width: 4px; height: 4px; margin-right: 2px; }
+    33% { width: 3px; height: 3px; margin-right: 3px; }
+   100% { width: 3px; height: 3px; margin-right: 3px; }
 }

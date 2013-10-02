@@ -30,6 +30,12 @@ var alpha = [
 
 var Routes = {};
 
+Routes.usableRoutes = [
+    'on/instagram/',
+    'reading/wired/',
+    'disappointed/with/the/government/'
+]
+
 Routes.routes = [
     {
         route: 'up/',
@@ -236,6 +242,32 @@ Routes.routes = [
                         ]
                     }
                 ]
+            },
+            {
+                route: 'reading/wired',
+                label: 'wired'
+            }
+        ]
+    },
+    {
+        route: 'disappointed/',
+        label: 'disappointed',
+        children: [
+            {
+                route: 'disappointed/with/', 
+                label: 'with',
+                children: [
+                    {
+                        route: 'disappointed/with/the/', 
+                        label: 'the',
+                        children: [
+                            {
+                                route: 'disappointed/with/the/government/', 
+                                label: 'government'
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     },
@@ -245,7 +277,21 @@ Routes.routes = [
     },
     {
         route: 'on/',
-        label: 'on'
+        label: 'on',
+        children: [
+            {
+                route: 'on/instagram', 
+                label: 'instagram'
+            },
+            {
+                route: 'on/pinterest', 
+                label: 'pinterest'
+            },
+            {
+                route: 'on/facebook', 
+                label: 'facebook'
+            }
+        ]
     },
     {
         route: 'in/',

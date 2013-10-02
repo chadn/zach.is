@@ -43,9 +43,17 @@ $(function() {
           history.pushState({}, '', '/' + currentRoute);
           $el.remove();
           $('.ui-autocomplete-input').blur();
-          $('#mainContent').attr('src', 'http://wired.heineman.info');
+          console.log(currentRoute);
+          if (_.contains(Routes.usableRoutes, currentRoute)) {
+            // console.log('Route exists!');
+            $('#mainContent').attr('src', '//zach.is/' + currentRoute);
+          } else {
+            $('#mainContent').attr('src', '//zach.is/not/finding/this/page');
+          }
+          $('#progress').css('opacity', 1);
           $('iframe').load(function() {
             console.log('iframe loaded!');
+            $('#progress').css('opacity', 0);
             $('#mainContent').css('opacity', 1);
           });
         } else {
@@ -62,7 +70,7 @@ $(function() {
         this.value = ui.item.value;
         // create another input and set up
         var newId = id + 1;
-        $('<input>').attr('id', newId).appendTo('.ui-widget');
+        $('<input>').attr('id', newId).insertAfter($('.ui-autocomplete-input').last());
         var currentRoute = getCurrentRoute();
         var newData = Routes.getChildrenOfNodeByName(currentRoute);
         var newDataArray = _.map(newData, function(item) { return item.label + ' /'; });
