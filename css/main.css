@@ -7,10 +7,39 @@ body {
 form {
   padding: 18px 0 0 88px;
   /*height: 80px;*/
-  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
-  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
-  background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
-  background: -o-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+  /*background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));*/
+  /*background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));*/
+  /*background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));*/
+  /*background: -o-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));*/
+}
+
+#guided {
+  position: absolute;
+  right: 72px;
+  top: 18px;
+}
+
+#guided a {
+  text-decoration: none;
+  font-family: 'Sentinel SSm A', 'Sentinel SSm B' !important;
+  color: black;
+}
+
+#guided a.disabled {
+  text-decoration: none;
+  font-family: 'Sentinel SSm A', 'Sentinel SSm B' !important;
+  color: #bbb;
+}
+
+#tags-label {
+  font-size: 12px !important;
+  font-weight: 700;
+  padding-right: 16px;
+}
+
+#tags-label span {
+  font-size: 13px !important;
+  font-weight: 500;
 }
 
 iframe {

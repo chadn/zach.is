@@ -1,7 +1,9 @@
+var linkPosition = 0;
+
 $(function() {
 
   var launchRoute = []
-  // var launchRoute = ['reading /', 'articles /', 'about /', 'cities /']
+  // var launchRoute = ['on /', 'instagram /']
 
   var selectItem = function(id, value) {
     var $el = $('a:contains(' + value + ')');
@@ -9,6 +11,13 @@ $(function() {
     $el.trigger('click');
     launchRoute.shift();
     // console.log(launchRoute);
+  }
+
+  var makeLaunchRoute = function(route) {
+    var launchRoute = route.split('/');
+    launchRoute = _.initial(launchRoute);
+    launchRoute = _.map(launchRoute, function(item) { return item + ' /'} );
+    return launchRoute;
   }
 
   var getCurrentRoute = function() {
@@ -44,6 +53,7 @@ $(function() {
           $el.remove();
           $('.ui-autocomplete-input').blur();
           console.log(currentRoute);
+          console.log(makeLaunchRoute(currentRoute));
           if (_.contains(Routes.usableRoutes, currentRoute)) {
             // console.log('Route exists!');
             $('#mainContent').attr('src', '//zach.is/' + currentRoute);
@@ -110,6 +120,32 @@ $(function() {
     var currentRoute = getCurrentRoute();
     history.pushState({}, '', '/' + currentRoute);
 
+  });
+
+  $('#next').on('click', function(e) {
+    e.preventDefault;
+    console.log('Next!');
+    launchRoute = makeLaunchRoute(Routes.usableRoutes[linkPosition]);
+    linkPosition = linkPosition + 1;
+    $('#prev').removeClass('disabled');
+    $('#1').focus();
+    selectItem(1, launchRoute[0]);
+    console.log('Link position = ' + linkPosition);
+  });
+
+  $('#prev').on('click', function(e) {
+    e.preventDefault;
+    console.log('Next!');
+    if (linkPosition > 1) {
+      linkPosition = linkPosition - 1;
+      launchRoute = makeLaunchRoute(Routes.usableRoutes[linkPosition]);
+    }
+    if (linkPosition == 0) {
+      $('#prev').addClass('disabled')
+    }
+    $('#1').focus();
+    selectItem(1, launchRoute[0]);
+    console.log('Link position = ' + linkPosition);
   });
 
   // setup the intial autocomplete on page load
