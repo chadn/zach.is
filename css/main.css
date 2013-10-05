@@ -4,14 +4,32 @@ body {
   padding: 0;
 }
 
+ui-helper-hidden-accessible
+
 form {
-  padding: 18px 0 0 88px;
+  padding: 14px 0 0 88px;
+}
+
+#behindForm {
+  position: fixed;
+  width: 100%;
+  /*height: 52px;*/
+  height: 64px;
+  display: block;
+  /*background-color: #fff;*/
+  z-index: -1;
+}
+
+#inputBG {
+  padding: 13px 0 10px 21px;
+  background-color: rgba(255,255,255,.8);
+}
+
   /*height: 80px;*/
   /*background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));*/
   /*background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));*/
   /*background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));*/
-  /*background: -o-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));*/
-}
+  /*background: -o-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));*/ 
 
 #guided {
   position: absolute;
@@ -47,7 +65,7 @@ iframe {
   width: 100%;
   height: 100%;
   top: 0px;
-  z-index: -1;
+  z-index: -10;
   border: none;
   opacity: 0;
   transition: opacity .25s ease-in-out;
@@ -112,6 +130,9 @@ input {
 
 #progress ul {
   margin: 0;
+  padding: 0;
+  line-height: 16px;
+  font-weight: 500;
 }
 
 .msg {
@@ -143,4 +164,67 @@ input {
     25% { width: 4px; height: 4px; margin-right: 2px; }
     33% { width: 3px; height: 3px; margin-right: 3px; }
    100% { width: 3px; height: 3px; margin-right: 3px; }
+}
+
+/* Layout helpers
+----------------------------------*/
+.ui-helper-hidden {
+  display: none;
+}
+.ui-helper-hidden-accessible {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.ui-helper-reset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  line-height: 1.3;
+  text-decoration: none;
+  font-size: 100%;
+  list-style: none;
+}
+.ui-helper-clearfix:before,
+.ui-helper-clearfix:after {
+  content: "";
+  display: table;
+  border-collapse: collapse;
+}
+.ui-helper-clearfix:after {
+  clear: both;
+}
+.ui-helper-clearfix {
+  min-height: 0; /* support: IE7 */
+}
+.ui-helper-zfix {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  opacity: 0;
+  filter:Alpha(Opacity=0);
+}
+
+.ui-front {
+  z-index: 100;
+}
+
+
+li {
+  list-style: none;
+/*  float: left;
+  position: relative;
+  top: 0;
+  margin: 1px .2em 0 0;
+  border-bottom-width: 0;
+  padding: 0;
+  white-space: nowrap;*/
 }

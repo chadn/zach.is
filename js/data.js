@@ -31,9 +31,19 @@ var alpha = [
 var Routes = {};
 
 Routes.usableRoutes = [
+    'building/models/',
     'on/instagram/',
+    'wearing/lots/of/hats/',
+    'working/at/pinterest/on/metadata/',
+    'making/gifs/',
+    'making/simple-shapes/',
     'reading/wired/',
-    'disappointed/with/the/government/'
+    'disappointed/with/the/government/',
+    'flying/',
+    'working/for/robert-rauschenberg/',
+    'using/lots/of/tools/',
+    'building/skyscrapers/',
+    'drawing/in/rome'
 ]
 
 Routes.routes = [
@@ -58,6 +68,14 @@ Routes.routes = [
         label: 'making',
         children: [
             {
+                route: 'making/gifs',
+                label: 'gifs'
+            },
+            {
+                route: 'making/simple-shapes',
+                label: 'simple-shapes'
+            },
+            {
                 route: 'making/this/',
                 label: 'this',
                 children: [
@@ -74,20 +92,46 @@ Routes.routes = [
         label: 'working',
         children: [
             {
+                route: 'working/at/',
+                label: 'at',
+                children: [
+                    {
+                        route: 'working/at/pinterest/', 
+                        label: 'pinterest',
+                        children: [
+                            {
+                                route: 'working/at/pinterest/on/', 
+                                label: 'on',
+                                children: [
+                                    {
+                                        route: 'working/at/pinterest/on/metadata/', 
+                                        label: 'metadata'
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 route: 'working/for/',
                 label: 'for',
                 children: [
                     {
-                        route: 'working/for/the-man', 
+                        route: 'working/for/the-man/', 
                         label: 'the-man'
                     },
                     {
-                        route: 'working/for/his-dad', 
+                        route: 'working/for/his-dad/', 
                         label: 'his-dad'
                     },
                     {
-                        route: 'working/for/the-cia',
+                        route: 'working/for/the-cia/',
                         label: 'the-cia'
+                    },
+                    {
+                        route: 'working/for/robert-rauschenberg/',
+                        label: 'robert-rauschenberg'
                     }
                 ]
             },
@@ -116,6 +160,20 @@ Routes.routes = [
                         label: 'denzel-washington'
                     }
                 ]
+            }
+        ]
+    },
+    {
+        route: 'building/',
+        label: 'building',
+        children: [
+            {
+                route: 'building/models/',
+                label: 'models',
+            },
+            {
+                route: 'building/skyscrapers/',
+                label: 'skyscrapers',
             }
         ]
     },
@@ -246,6 +304,54 @@ Routes.routes = [
             {
                 route: 'reading/wired',
                 label: 'wired'
+            }
+        ]
+    },
+    {
+        route: 'flying/',
+        label: 'flying',
+    },
+    {
+        route: 'wearing/',
+        label: 'wearing',
+        children: [
+            {
+                route: 'wearing/lots/', 
+                label: 'lots',
+                children: [
+                    {
+                        route: 'wearing/lots/of/', 
+                        label: 'of',
+                        children: [
+                            {
+                                route: 'wearing/lots/of/hats', 
+                                label: 'hats'
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        route: 'using/',
+        label: 'using',
+        children: [
+            {
+                route: 'using/lots/', 
+                label: 'lots',
+                children: [
+                    {
+                        route: 'using/lots/of/', 
+                        label: 'of',
+                        children: [
+                            {
+                                route: 'using/lots/of/tools/', 
+                                label: 'tools'
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     },

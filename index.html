@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <title>zach.is /</title>
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  <!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" /> -->
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6792632/660062/css/fonts.css" />
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
@@ -14,20 +14,24 @@
 </head>
 <body>
 
- 
+<div id="behindForm"></div>
 <form class="ui-widget">
 	<span id="hiddenInput" style="display:none"></span>
-
-  <label for="1">// zach.is / </label>
-  <input id="1" />
-  <div id="progress">
-    <ul class="loading">
-      <li class="msg">loading</li>
-      <li class="dot one"></li>
-      <li class="dot two"></li>
-      <li class="dot three"></li>
-    </ul>
+  <div id="inputHolder">
+    <span id="inputBG">
+      <label for="1">// zach.is / </label>
+      <input id="1" />
+    </span>
+    <div id="progress">
+      <ul class="loading">
+        <li class="msg">loading</li>
+        <li class="dot one"></li>
+        <li class="dot two"></li>
+        <li class="dot three"></li>
+      </ul>
+    </div>
   </div>
+
   <div id="guided">
 
     <!-- <label id="tags-label"><span>currently viewing: </span>[ all ]</label> -->
