@@ -1,24 +1,26 @@
 var linkPosition = 0;
 
+// Ugly jQueryUI monkey patch
 $.ui.autocomplete.prototype._move = function(direction, event) {
-  var upArrow = /^previous/.test( direction );
-  var downArrow = /^next/.test( direction );
-  var noMenuItem = _.isUndefined(this.menu.active);
-  var theFirstItem = this.menu.isFirstItem();
-  var theLastItem = this.menu.isLastItem();
+  var upArrow = /^previous/.test(direction),
+      downArrow = /^next/.test(direction),
+      noMenuItem = _.isUndefined(this.menu.active),
+      theFirstItem = this.menu.isFirstItem(),
+      theLastItem = this.menu.isLastItem(),
+      index, newTop;
 
   if ((upArrow && !noMenuItem) && ((!theFirstItem && upArrow) && upArrow)) {
     this.menu[ 'previous' ]( event );
-    var index = this.menu.active.index();
-    var newTop =  - 13 - index * 32;
+    index = this.menu.active.index();
+    newTop =  - 13 - index * 32;
     $('.ui-autocomplete').css('top', newTop + 'px');
   } else if ((!theLastItem && downArrow) && downArrow) {
     this.menu[ 'next' ]( event );
-    var index = this.menu.active.index();
-    var newTop = - 13 - index * 32;
+    index = this.menu.active.index();
+    newTop = - 13 - index * 32;
     $('.ui-autocomplete').css('top', newTop + 'px');
   } else {
-    console.log('Don\'t move!');
+    console.log('Don\'t move!'); // Or I'll shoot!
   }
 };
 
@@ -26,12 +28,12 @@ $(function() {
 
   var pressDown = jQuery.Event("keypress");
   pressDown.ctrlKey = false;
-  pressDown.which = $.ui.keyCode.DOWN ;
+  pressDown.which = $.ui.keyCode.DOWN;
   pressDown.keyCode = $.ui.keyCode.DOWN;
 
   var pressTab = jQuery.Event("keypress");
   pressTab.ctrlKey = false;
-  pressTab.which = $.ui.keyCode.ENTER ;
+  pressTab.which = $.ui.keyCode.ENTER;
   pressTab.keyCode = $.ui.keyCode.ENTER;
 
 
@@ -157,12 +159,11 @@ $(function() {
       $el.focus();      
     }, 50);
 
-
   }
 
   $('form').on('focus', '.ui-autocomplete-input', function(){
 
-    console.log('Focused! (element)');
+    // console.log('Focused! (element)');
 
     $('#mainContent').css('opacity', 0);
 
