@@ -1,6 +1,39 @@
 var linkPosition = 0;
 
+$.ui.autocomplete.prototype._move = function(direction, event) {
+  var upArrow = /^previous/.test( direction );
+  var downArrow = /^next/.test( direction );
+  var noMenuItem = _.isUndefined(this.menu.active);
+  var theFirstItem = this.menu.isFirstItem();
+  var theLastItem = this.menu.isLastItem();
+
+  if ((upArrow && !noMenuItem) && ((!theFirstItem && upArrow) && upArrow)) {
+    this.menu[ 'previous' ]( event );
+    var index = this.menu.active.index();
+    var newTop =  - 13 - index * 32;
+    $('.ui-autocomplete').css('top', newTop + 'px');
+  } else if ((!theLastItem && downArrow) && downArrow) {
+    this.menu[ 'next' ]( event );
+    var index = this.menu.active.index();
+    var newTop = - 13 - index * 32;
+    $('.ui-autocomplete').css('top', newTop + 'px');
+  } else {
+    console.log('Don\'t move!');
+  }
+};
+
 $(function() {
+
+  var pressDown = jQuery.Event("keypress");
+  pressDown.ctrlKey = false;
+  pressDown.which = $.ui.keyCode.DOWN ;
+  pressDown.keyCode = $.ui.keyCode.DOWN;
+
+  var pressTab = jQuery.Event("keypress");
+  pressTab.ctrlKey = false;
+  pressTab.which = $.ui.keyCode.ENTER ;
+  pressTab.keyCode = $.ui.keyCode.ENTER;
+
 
   var launchRoute = []
   // var launchRoute = ['on /', 'instagram /']
@@ -34,6 +67,26 @@ $(function() {
 
     var $el = $('#' + id);
 
+    $el.bind( "keydown", function( event ) {
+      if ( event.keyCode === $.ui.keyCode.TAB &&
+          $( this ).data( "ui-autocomplete" ).menu.active ) {
+        $(this).trigger(pressTab);
+        // $(this).trigger(pressDown);
+        $(this).trigger(pressTab);
+        console.log('Tabbed active!');
+        event.preventDefault();
+      }
+      if ( event.keyCode === $.ui.keyCode.TAB && 
+          !$( this ).data( "ui-autocomplete" ).menu.active) {
+        $(this).trigger(pressDown);
+        $(this).trigger(pressTab);
+        // $(this).trigger(pressDown);
+        $(this).trigger(pressTab);
+        console.log('Tabbed!');
+        event.preventDefault();
+      }
+    });
+
     // initialize the autocomplete
     $el.autocomplete({
       minLength: 0,
@@ -44,6 +97,11 @@ $(function() {
             return matcher.test( item );
           })
         );
+      },
+      position: { 
+        my: "left top",
+        at: "left top",
+        collision: "none" 
       },
       create: function(e, ui) { 
         if (data.length < 1) {
@@ -71,12 +129,13 @@ $(function() {
         }
       },
       focus: function(e, ui) {
-        // return false; // this will prevent the placeholder from being populated with the focused item
+        return false; // this will prevent the placeholder from being populated with the focused item
       },
       select: function(e, ui) {
         // console.log('Selected! (autocomplete)');
         // set the input width relative to the selected content
         $el.css('width', $('#hiddenInput').html(ui.item.value).width());
+        //$el.css('position', 'relative');
         this.value = ui.item.value;
         // create another input and set up
         var newId = id + 1;
@@ -93,8 +152,11 @@ $(function() {
     });
 
     // automatically open the autocomplete
-    $el.autocomplete('search', '');
-    $el.focus();
+    setTimeout(function(){
+      $el.autocomplete('search', '');
+      $el.focus();      
+    }, 50);
+
 
   }
 

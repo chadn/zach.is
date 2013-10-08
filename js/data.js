@@ -157,7 +157,7 @@ Routes.routes = [
                     },
                     {
                         route: 'working/with/denzel-washington', 
-                        label: 'denzel-washington'
+                        label: 'denzel-washington-and-all-his-friends'
                     }
                 ]
             }

@@ -4,10 +4,11 @@ body {
   padding: 0;
 }
 
-ui-helper-hidden-accessible
-
 form {
-  padding: 14px 0 0 88px;
+  /*padding: 14px 0 0 88px;*/
+  position: relative;
+  top: 20px;
+  left: 20px;
 }
 
 #behindForm {
@@ -21,8 +22,8 @@ form {
 }
 
 #inputBG {
-  padding: 13px 0 10px 21px;
-  background-color: rgba(255,255,255,.8);
+  padding: 16px 0 10px 21px;
+  background-color: rgba(255,255,255,.9);
 }
 
   /*height: 80px;*/
@@ -99,22 +100,33 @@ label, input, .ui-autocomplete, #hiddenInput, #progress {
 .ui-state-focus {
   border: none !important;
   background: none !important;
+  color: #000 !important;
   margin: 0;
 }
+
 .ui-menu {
   margin: 0;
   padding: 0;
+  width: 40px;
+  white-space: nowrap;
 }
 .ui-menu-item {
   height: 32px;
 }
+
 input {
   outline: none;
   /*border: 1px solid red;*/
   background: rgba(0,0,0,0);
   font-weight: normal;
   padding: 0;
-  margin-left: -8px;
+  margin-left: -4px;
+  /*position: absolute;*/
+  /*z-index: 99999;*/
+}
+
+input:last-child {
+
 }
 
 #progress 
@@ -215,6 +227,11 @@ input {
 
 .ui-front {
   z-index: 100;
+}
+
+.ui-menu-item a {
+  font-weight: 500;
+  cursor: pointer;
 }
 
 
