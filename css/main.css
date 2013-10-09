@@ -114,6 +114,11 @@ label, input, .ui-autocomplete, #hiddenInput, #progress {
   height: 32px;
 }
 
+.ui-menu-item span {
+  /*color: transparent !important;*/
+  color: black !important;
+}
+
 input {
   outline: none;
   /*border: 1px solid red;*/
@@ -230,8 +235,9 @@ input:last-child {
 }
 
 .ui-menu-item a {
-  font-weight: 500;
-  cursor: pointer;
+  font-weight: 400;
+  cursor: default;
+  /*background-color: white;*/
 }
 
 

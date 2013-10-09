@@ -38,11 +38,11 @@ $(function() {
 
 
   var launchRoute = []
-  // var launchRoute = ['on /', 'instagram /']
+  //var launchRoute = ['on /', 'instagram /']
 
   var selectItem = function(id, value) {
     var $el = $('a:contains(' + value + ')');
-    console.log($el);
+    console.log($('a:contains(' + value + ')'));
     $el.trigger('click');
     launchRoute.shift();
     // console.log(launchRoute);
@@ -70,6 +70,10 @@ $(function() {
     var $el = $('#' + id);
 
     $el.bind( "keydown", function( event ) {
+      if ($(this).data('ui-autocomplete').term == '') {
+        console.log('Whited out');
+        $('.ui-menu-item').css('background','#fff');        
+      }
       if ( event.keyCode === $.ui.keyCode.TAB &&
           $( this ).data( "ui-autocomplete" ).menu.active ) {
         $(this).trigger(pressTab);
@@ -105,6 +109,22 @@ $(function() {
         at: "left top",
         collision: "none" 
       },
+      open: function () {
+        $('.ui-menu-item').css('background','#none');
+
+        var auto = $(this).data('ui-autocomplete');
+        auto
+        .menu
+        .element
+        .find('a')
+        .first()
+        .each(function() {
+            var self = $(this);
+            self.html(self.text().replace(new RegExp("(^" + auto.term + ")", "gi"), '<span>$1</span>'));
+        });
+
+        console.log($(this).data('uiAutocomplete').term);
+      },
       create: function(e, ui) { 
         if (data.length < 1) {
           console.log('End of route!'); 
@@ -129,6 +149,12 @@ $(function() {
         } else {
           //$el.attr('placeholder', data[0]);          
         }
+
+        setTimeout(function(){
+          if (launchRoute.length > 0) {
+            selectItem(1, launchRoute[0]);
+          }
+        }, 100);
       },
       focus: function(e, ui) {
         return false; // this will prevent the placeholder from being populated with the focused item
@@ -147,9 +173,14 @@ $(function() {
         var newDataArray = _.map(newData, function(item) { return item.label + ' /'; });
         console.log(launchRoute.length);
         setupAutocomplete(newId, newDataArray);
-        if (launchRoute.length > 0) {
-          selectItem(newId, launchRoute[newId - 1]);
-        }
+        setTimeout(function(){
+          if (launchRoute.length > 0) {
+            selectItem(newId, launchRoute[newId - 1]);
+          }
+        }, 100);
+      },
+      change: function() {
+        // console.log('Changed');
       }
     });
 
@@ -215,7 +246,4 @@ $(function() {
   var firstLevel = Routes.getFirstLevelData();
   var firstLevelArray = _.map(firstLevel, function(item) { return item.label + ' /'; });
   setupAutocomplete(1, firstLevelArray);
-  if (launchRoute.length > 0) {
-    selectItem(1, launchRoute[0]);
-  }
 });
