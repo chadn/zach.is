@@ -43,7 +43,7 @@ Z.go = function(initialRoute) {
   pressTab.keyCode = $.ui.keyCode.TAB;
 
   var selectItem = function(id, value) {
-    var $el = $('a:contains(' + value + ')');
+    var $el = $('input').last().data('ui-autocomplete').menu.element.children().find('a:contains(' + value + ')');
     $el.trigger('click');
     launchRoute.shift();
   }
@@ -52,7 +52,11 @@ Z.go = function(initialRoute) {
     launchRoute = route.split('/');
     launchRoute = _.initial(launchRoute);
     launchRoute = _.map(launchRoute, function(item) { return item + ' /'} );
-    callback(launchRoute);
+    if (typeof callback === 'function' && callback()) {
+      callback(launchRoute);
+    } else {
+      return launchRoute;
+    }
   }
 
   var getCurrentRoute = function() {
@@ -144,7 +148,7 @@ Z.go = function(initialRoute) {
           if (launchRoute.length > 0) {
             selectItem(1, launchRoute[0]);
           }
-        }, 100);
+        }, 150);
       },
       focus: function(e, ui) {
         return false; // this will prevent the placeholder from being populated with the focused item
@@ -160,11 +164,6 @@ Z.go = function(initialRoute) {
         var newData = Routes.getChildrenOfNodeByName(currentRoute);
         var newDataArray = _.map(newData, function(item) { return item.label + ' /'; });
         setupAutocomplete(newId, newDataArray);
-        setTimeout(function(){
-          if (launchRoute.length > 0) {
-            selectItem(newId, launchRoute[newId - 1]);
-          }
-        }, 100);
       }
     });
 
@@ -200,6 +199,18 @@ Z.go = function(initialRoute) {
 
   });
 
+  $('#free-guided').on('click', function(e) {
+    e.preventDefault;
+    console.log('First!');
+    $(this).css('display','none');
+    $('#prev-next').css('display','block');
+    launchRoute = makeLaunchRoute(Routes.usableRoutes[linkPosition]);
+    linkPosition = linkPosition + 1;
+    $('#1').focus();
+    selectItem(1, launchRoute[0]);
+    console.log('Link position = ' + linkPosition);
+  });
+
   $('#next').on('click', function(e) {
     e.preventDefault;
     console.log('Next!');
@@ -214,16 +225,18 @@ Z.go = function(initialRoute) {
   $('#prev').on('click', function(e) {
     e.preventDefault;
     console.log('Next!');
-    if (linkPosition > 1) {
-      linkPosition = linkPosition - 1;
-      launchRoute = makeLaunchRoute(Routes.usableRoutes[linkPosition]);
+    if (!$(this).hasClass('disabled')) {
+      if (linkPosition > 1) {
+        linkPosition = linkPosition - 1;
+        launchRoute = makeLaunchRoute(Routes.usableRoutes[linkPosition]);
+      }
+      if (linkPosition == 1) {
+        $('#prev').addClass('disabled')
+      }
+      $('#1').focus();
+      selectItem(1, launchRoute[0]);
+      console.log('Link position = ' + linkPosition);
     }
-    if (linkPosition == 0) {
-      $('#prev').addClass('disabled')
-    }
-    $('#1').focus();
-    selectItem(1, launchRoute[0]);
-    console.log('Link position = ' + linkPosition);
   });
 
   // setup the intial autocomplete on page load

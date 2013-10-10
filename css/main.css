@@ -48,10 +48,19 @@ label, input, #progress, ul, li {
   color: black;
 }
 
+#guided a:hover {
+  border-bottom: 1px solid black;
+}
+
 #guided a.disabled {
-  text-decoration: none;
-  font-family: 'Sentinel SSm A', 'Sentinel SSm B' !important;
   color: #bbb;
+  cursor: default;
+}
+
+#guided a.disabled:hover {
+  color: #bbb;
+  cursor: default;
+  border-bottom: none;
 }
 
 #tags-label {
