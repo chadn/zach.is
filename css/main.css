@@ -11,6 +11,10 @@ form {
   left: 20px;
 }
 
+label, input, #progress, ul, li {
+  line-height: 32px;
+}
+
 #behindForm {
   position: fixed;
   width: 100%;

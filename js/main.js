@@ -31,14 +31,15 @@ $(function() {
   pressDown.which = $.ui.keyCode.DOWN;
   pressDown.keyCode = $.ui.keyCode.DOWN;
 
+  var pressEnter = jQuery.Event("keypress");
+  pressEnter.ctrlKey = false;
+  pressEnter.which = $.ui.keyCode.ENTER;
+  pressEnter.keyCode = $.ui.keyCode.ENTER;
+
   var pressTab = jQuery.Event("keypress");
   pressTab.ctrlKey = false;
-  pressTab.which = $.ui.keyCode.ENTER;
-  pressTab.keyCode = $.ui.keyCode.ENTER;
-
-
-  var launchRoute = []
-  //var launchRoute = ['on /', 'instagram /']
+  pressTab.which = $.ui.keyCode.TAB;
+  pressTab.keyCode = $.ui.keyCode.TAB;
 
   var selectItem = function(id, value) {
     var $el = $('a:contains(' + value + ')');
@@ -76,20 +77,27 @@ $(function() {
       }
       if ( event.keyCode === $.ui.keyCode.TAB &&
           $( this ).data( "ui-autocomplete" ).menu.active ) {
-        $(this).trigger(pressTab);
-        // $(this).trigger(pressDown);
-        $(this).trigger(pressTab);
+        $(this).trigger(pressEnter);
+        $(this).trigger(pressEnter);
         console.log('Tabbed active!');
         event.preventDefault();
       }
       if ( event.keyCode === $.ui.keyCode.TAB && 
           !$( this ).data( "ui-autocomplete" ).menu.active) {
-        $(this).trigger(pressDown);
-        $(this).trigger(pressTab);
-        // $(this).trigger(pressDown);
-        $(this).trigger(pressTab);
-        console.log('Tabbed!');
-        event.preventDefault();
+        if ($(this).data('ui-autocomplete').term != '') {
+          event.preventDefault();
+          var $el = $(this).data('ui-autocomplete').menu.element.children().first().find('a');
+          // console.log(theOne);
+          // var $el = $('a:contains(' + value + ')');
+          // console.log($('a:contains(' + value + ')'));
+          $el.trigger('click');        
+        } else {
+          $(this).trigger(pressDown);
+          $(this).trigger(pressEnter);
+          $(this).trigger(pressEnter);
+          console.log('Tabbed!');
+          event.preventDefault();          
+        }
       }
     });
 
@@ -113,17 +121,14 @@ $(function() {
         $('.ui-menu-item').css('background','#none');
 
         var auto = $(this).data('ui-autocomplete');
-        auto
-        .menu
-        .element
-        .find('a')
-        .first()
+        $(this).data('ui-autocomplete').menu.element.children().first().find('a')
         .each(function() {
             var self = $(this);
             self.html(self.text().replace(new RegExp("(^" + auto.term + ")", "gi"), '<span>$1</span>'));
         });
 
-        console.log($(this).data('uiAutocomplete').term);
+        // console.log($(this).data('ui-autocomplete').menu.element.children().first());
+        // console.log($(this).data('ui-autocomplete').term);
       },
       create: function(e, ui) { 
         if (data.length < 1) {
@@ -245,5 +250,9 @@ $(function() {
   // setup the intial autocomplete on page load
   var firstLevel = Routes.getFirstLevelData();
   var firstLevelArray = _.map(firstLevel, function(item) { return item.label + ' /'; });
+
+  var launchRoute = []
+  //var launchRoute = ['on /', 'instagram /']
   setupAutocomplete(1, firstLevelArray);
+  
 });
