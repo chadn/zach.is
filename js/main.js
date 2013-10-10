@@ -1,4 +1,5 @@
-var linkPosition = 0;
+var Z = {};
+linkPosition = 0;
 
 // Ugly jQueryUI monkey patch
 $.ui.autocomplete.prototype._move = function(direction, event) {
@@ -24,7 +25,7 @@ $.ui.autocomplete.prototype._move = function(direction, event) {
   }
 };
 
-$(function() {
+Z.go = function(initialRoute) {
 
   var pressDown = jQuery.Event("keypress");
   pressDown.ctrlKey = false;
@@ -43,17 +44,15 @@ $(function() {
 
   var selectItem = function(id, value) {
     var $el = $('a:contains(' + value + ')');
-    console.log($('a:contains(' + value + ')'));
     $el.trigger('click');
     launchRoute.shift();
-    // console.log(launchRoute);
   }
 
-  var makeLaunchRoute = function(route) {
-    var launchRoute = route.split('/');
+  var makeLaunchRoute = function(route, callback) {
+    launchRoute = route.split('/');
     launchRoute = _.initial(launchRoute);
     launchRoute = _.map(launchRoute, function(item) { return item + ' /'} );
-    return launchRoute;
+    callback(launchRoute);
   }
 
   var getCurrentRoute = function() {
@@ -62,7 +61,6 @@ $(function() {
       currentRoute.push($(this).val().replace(' ',''));
     });
     currentRoute = currentRoute.join('');
-    // console.log('Current route = ' + currentRoute);
     return currentRoute;
   }
 
@@ -87,9 +85,6 @@ $(function() {
         if ($(this).data('ui-autocomplete').term != '') {
           event.preventDefault();
           var $el = $(this).data('ui-autocomplete').menu.element.children().first().find('a');
-          // console.log(theOne);
-          // var $el = $('a:contains(' + value + ')');
-          // console.log($('a:contains(' + value + ')'));
           $el.trigger('click');        
         } else {
           $(this).trigger(pressDown);
@@ -119,42 +114,32 @@ $(function() {
       },
       open: function () {
         $('.ui-menu-item').css('background','#none');
-
         var auto = $(this).data('ui-autocomplete');
         $(this).data('ui-autocomplete').menu.element.children().first().find('a')
         .each(function() {
             var self = $(this);
             self.html(self.text().replace(new RegExp("(^" + auto.term + ")", "gi"), '<span>$1</span>'));
         });
-
-        // console.log($(this).data('ui-autocomplete').menu.element.children().first());
-        // console.log($(this).data('ui-autocomplete').term);
       },
       create: function(e, ui) { 
         if (data.length < 1) {
-          console.log('End of route!'); 
+          // console.log('End of route!'); 
           var currentRoute = getCurrentRoute();
           history.pushState({}, '', '/' + currentRoute);
           $el.remove();
           $('.ui-autocomplete-input').blur();
-          console.log(currentRoute);
-          console.log(makeLaunchRoute(currentRoute));
           if (_.contains(Routes.usableRoutes, currentRoute)) {
-            // console.log('Route exists!');
-            $('#mainContent').attr('src', '//zach.is/' + currentRoute);
+            $('#mainContent').attr('src', '//zach.is/frames/' + currentRoute);
           } else {
-            $('#mainContent').attr('src', '//zach.is/not/finding/this/page');
+            $('#mainContent').attr('src', '//zach.is/frames/not/finding/this/page');
           }
           $('#progress').css('opacity', 1);
           $('iframe').load(function() {
-            console.log('iframe loaded!');
+            // console.log('iframe loaded!');
             $('#progress').css('opacity', 0);
             $('#mainContent').css('opacity', 1);
           });
-        } else {
-          //$el.attr('placeholder', data[0]);          
         }
-
         setTimeout(function(){
           if (launchRoute.length > 0) {
             selectItem(1, launchRoute[0]);
@@ -165,10 +150,8 @@ $(function() {
         return false; // this will prevent the placeholder from being populated with the focused item
       },
       select: function(e, ui) {
-        // console.log('Selected! (autocomplete)');
         // set the input width relative to the selected content
         $el.css('width', $('#hiddenInput').html(ui.item.value).width());
-        //$el.css('position', 'relative');
         this.value = ui.item.value;
         // create another input and set up
         var newId = id + 1;
@@ -176,16 +159,12 @@ $(function() {
         var currentRoute = getCurrentRoute();
         var newData = Routes.getChildrenOfNodeByName(currentRoute);
         var newDataArray = _.map(newData, function(item) { return item.label + ' /'; });
-        console.log(launchRoute.length);
         setupAutocomplete(newId, newDataArray);
         setTimeout(function(){
           if (launchRoute.length > 0) {
             selectItem(newId, launchRoute[newId - 1]);
           }
         }, 100);
-      },
-      change: function() {
-        // console.log('Changed');
       }
     });
 
@@ -251,8 +230,13 @@ $(function() {
   var firstLevel = Routes.getFirstLevelData();
   var firstLevelArray = _.map(firstLevel, function(item) { return item.label + ' /'; });
 
-  var launchRoute = []
-  //var launchRoute = ['on /', 'instagram /']
-  setupAutocomplete(1, firstLevelArray);
-  
-});
+  var launchRoute = [];
+  if (_.isUndefined(initialRoute)) {
+    var initialRoute = '';
+  }
+
+  makeLaunchRoute(initialRoute, function(){
+    setupAutocomplete(1, firstLevelArray);
+  });
+
+}
