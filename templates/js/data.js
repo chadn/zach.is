@@ -30,7 +30,71 @@ var alpha = [
 
 var Routes = {};
 
-Routes.usableRoutes = [
+Routes.usableRoutes = {
+    'in/love/with/you/' : {
+        'more-info' : true
+    },
+    'building/models/' : {
+        'more-info' : true        
+    },
+    'on/instagram/' : {
+        'more-info' : true
+    },
+    'wearing/lots/of/hats/' : {
+        'more-info' : true
+    },
+    'working/at/pinterest/on/metadata/' : {
+        'more-info' : true
+    },
+    'making/gifs/' : {
+        'more-info' : false
+    },
+    'making/simple-shapes/' : {
+        'more-info' : true
+    },
+    'reading/wired/' : {
+        'more-info' : true
+    },
+    'disappointed/with/the/government/' : {
+        'more-info' : true
+    },
+    'flying/' : {
+        'more-info' : true
+    },
+    'working/for/robert-rauschenberg/' : {
+        'more-info' : true
+    },
+    'using/lots/of/tools/' : {
+        'more-info' : true
+    },
+    'building/skyscrapers/' : {
+        'more-info' : true
+    },
+    'teaching/at/yale/for/david-blight/' : {
+        'more-info' : true
+    },
+    'teaching/at/yale/for/diana-kleiner/' : {
+        'more-info' : true
+    },
+    'teaching/at/yale/for/diana-kleiner-again/' : {
+        'more-info' : true
+    },
+    'teaching/at/yale/for/dolores-hayden/' : {
+        'more-info' : true
+    },
+    'teaching/at/yale/for/matthew-jacobson/' : {
+        'more-info' : true
+    },
+    'teaching/at/yale/for/michael-denning/' : {
+        'more-info' : true
+    },
+    'teaching/at/yale/for/vincent-scully/' : {
+        'more-info' : true
+    }
+    // 'drawing/in/rome/'
+}
+
+Routes.tourRoutes = [
     'building/models/',
     'on/instagram/',
     'wearing/lots/of/hats/',
@@ -43,14 +107,6 @@ Routes.usableRoutes = [
     'working/for/robert-rauschenberg/',
     'using/lots/of/tools/',
     'building/skyscrapers/',
-    'teaching/at/yale/for/david-blight/',
-    'teaching/at/yale/for/diana-kleiner/',
-    'teaching/at/yale/for/diana-kleiner-again/',
-    'teaching/at/yale/for/dolores-hayden/',
-    'teaching/at/yale/for/matthew-jacobson/',
-    'teaching/at/yale/for/michael-denning/',
-    'teaching/at/yale/for/vincent-scully/'
-    // 'drawing/in/rome/'
 ]
 
 Routes.routes = [
@@ -460,7 +516,25 @@ Routes.routes = [
     },
     {
         route: 'in/',
-        label: 'in'
+        label: 'in',
+        children: [
+            {
+                route: 'in/love/',
+                label: 'love',
+                children: [
+                    {
+                        route: 'in/love/with/',
+                        label: 'with',
+                        children: [
+                            {
+                                route: 'in/love/with/you/',
+                                label: 'you'
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     },
     {
         route: 'on-top-of/',

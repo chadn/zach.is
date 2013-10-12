@@ -13,12 +13,13 @@ $.ui.autocomplete.prototype._move = function(direction, event) {
   if ((upArrow && !noMenuItem) && ((!theFirstItem && upArrow) && upArrow)) {
     this.menu[ 'previous' ]( event );
     index = this.menu.active.index();
-    newTop =  - 13 - index * 32;
+    //
+    newTop = - index * 32;
     $('.ui-autocomplete').css('top', newTop + 'px');
   } else if ((!theLastItem && downArrow) && downArrow) {
     this.menu[ 'next' ]( event );
     index = this.menu.active.index();
-    newTop = - 13 - index * 32;
+    newTop = - index * 32;
     $('.ui-autocomplete').css('top', newTop + 'px');
   } else {
     console.log('Don\'t move!'); // Or I'll shoot!
@@ -132,20 +133,21 @@ Z.go = function(initialRoute) {
           history.pushState({}, '', '/' + currentRoute);
           $el.remove();
           $('.ui-autocomplete-input').blur();
-          if (_.contains(Routes.usableRoutes, currentRoute)) {
+          if (_.has(Routes.usableRoutes, currentRoute)) {
             $('#mainContent').attr('src', '//zach.is/frames/' + currentRoute);
           } else {
             $('#mainContent').attr('src', '//zach.is/frames/not/finding/this/page');
           }
           $('#progress').css('opacity', 1);
-          var theLoad = '/' + currentRoute + ' #contents';
-          console.log(theLoad);
-          // $('#explanation').load('/' + currentRoute + ' #explanation');
-          $('#explanation').load(theLoad);
+          var theLoad = '/' + currentRoute + ' #more-info-contents';
+          $('#more-info').load(theLoad);
           $('iframe').load(function() {
             // console.log('iframe loaded!');
             $('#progress').css('opacity', 0);
             $('#mainContent').css('opacity', 1);
+            if (Routes.usableRoutes[currentRoute]['more-info']) {
+              $('#more-info-link').css('display', 'inherit');
+            }
           });
         }
         setTimeout(function(){
@@ -184,6 +186,7 @@ Z.go = function(initialRoute) {
     // console.log('Focused! (element)');
 
     $('#mainContent').css('opacity', 0);
+    $('#more-info-link').css('display', 'none');
 
     var focusedId = parseInt($(this).attr('id'));
 
@@ -208,7 +211,7 @@ Z.go = function(initialRoute) {
     console.log('First!');
     $(this).css('display','none');
     $('#prev-next').css('display','block');
-    launchRoute = makeLaunchRoute(Routes.usableRoutes[linkPosition]);
+    launchRoute = makeLaunchRoute(Routes.tourRoutes[linkPosition]);
     linkPosition = linkPosition + 1;
     $('#1').focus();
     selectItem(1, launchRoute[0]);
@@ -218,7 +221,7 @@ Z.go = function(initialRoute) {
   $('#next').on('click', function(e) {
     e.preventDefault;
     console.log('Next!');
-    launchRoute = makeLaunchRoute(Routes.usableRoutes[linkPosition]);
+    launchRoute = makeLaunchRoute(Routes.tourRoutes[linkPosition]);
     linkPosition = linkPosition + 1;
     $('#prev').removeClass('disabled');
     $('#1').focus();
@@ -232,7 +235,7 @@ Z.go = function(initialRoute) {
     if (!$(this).hasClass('disabled')) {
       if (linkPosition > 1) {
         linkPosition = linkPosition - 1;
-        launchRoute = makeLaunchRoute(Routes.usableRoutes[linkPosition]);
+        launchRoute = makeLaunchRoute(Routes.tourRoutes[linkPosition]);
       }
       if (linkPosition == 1) {
         $('#prev').addClass('disabled')

@@ -11,16 +11,17 @@
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.1.0/lodash.min.js"></script>
+  <script src="/js/lib/jquery.fancybox.js"></script>
 </head>
 <body>
 
-<div id="behindForm"></div>
 <form class="ui-widget">
-	<span id="hiddenInput" style="display:none"></span>
   <div id="inputHolder">
+    <span id="hiddenInput" style="display:none"></span>
     <span id="inputBG">
       <label for="1">// zach.is / </label>
       <input id="1" />
+      <a id="more-info-link" href="#more-info" title="more-info" class="fancybox">more-info</a>
     </span>
     <div id="progress">
       <ul class="loading">
@@ -29,6 +30,12 @@
         <li class="dot two"></li>
         <li class="dot three"></li>
       </ul>
+    </div>
+  </div>
+
+  <div id="more-info" class="info-card">
+    <div id="more-info-contents">
+      {{{ more-info }}}
     </div>
   </div>
 
@@ -51,18 +58,45 @@
 
 </form>
 
-<div id="explanation" style="display:none">
-  <div id="contents">
-    {{{explanation}}}
-  </div>
-</div>
-
 <iframe id="mainContent"></iframe>
 
 <script src="/js/data.js"></script>
 <script src="/js/main.js"></script>
 <script type="text/javascript">
   $(function() {
+    $(".fancybox")
+    .attr('rel', 'gallery')
+    .fancybox({
+        padding: 0,
+        openEffect: 'none',
+        helpers: {
+            title: null,
+            overlay: {
+                closeClick: true,
+                locked: false
+            }
+        },
+        loop: false,
+        nextEffect: 'none',
+        prevEffect: 'none',
+        scrolling: 'no',
+        autoSize: false,
+        width: 680,
+        height: 460,
+        nextClick: true,
+        closeBtn: false,
+        beforeShow: function () {
+            $("body").css({
+                'overflow-y': 'hidden'
+            });
+        },
+        afterClose: function () {
+            // $("body").css({
+            //     'overflow-y': 'visible'
+            // });
+        }
+    });
+
     Z.go('{{{route}}}');
   });
 </script>
