@@ -42,7 +42,14 @@ Routes.usableRoutes = [
     'flying/',
     'working/for/robert-rauschenberg/',
     'using/lots/of/tools/',
-    'building/skyscrapers/'
+    'building/skyscrapers/',
+    'teaching/at/yale/for/david-blight/',
+    'teaching/at/yale/for/diana-kleiner/',
+    'teaching/at/yale/for/diana-kleiner-again/',
+    'teaching/at/yale/for/dolores-hayden/',
+    'teaching/at/yale/for/matthew-jacobson/',
+    'teaching/at/yale/for/michael-denning/',
+    'teaching/at/yale/for/vincent-scully/'
     // 'drawing/in/rome/'
 ]
 
@@ -326,6 +333,58 @@ Routes.routes = [
                             {
                                 route: 'wearing/lots/of/hats', 
                                 label: 'hats'
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        route: 'teaching/',
+        label: 'teaching',
+        children: [
+            {
+                route: 'teaching/at/', 
+                label: 'at',
+                children: [
+                    {
+                        route: 'teaching/at/yale/', 
+                        label: 'yale',
+                        children: [
+                            {
+                                route: 'teaching/at/yale/for/', 
+                                label: 'for',
+                                children: [
+                                    {
+                                        route: 'teaching/at/yale/for/david-blight', 
+                                        label: 'david-blight'
+                                    },
+                                    {
+                                        route: 'teaching/at/yale/for/diana-kleiner', 
+                                        label: 'diana-kleiner'
+                                    },
+                                    {
+                                        route: 'teaching/at/yale/for/diana-kleiner-again', 
+                                        label: 'diana-kleiner-again'
+                                    },                                    
+                                    {
+                                        route: 'teaching/at/yale/for/dolores-hayden', 
+                                        label: 'dolores-hayden'
+                                    },                                    
+                                    {
+                                        route: 'teaching/at/yale/for/matthew-jacobson', 
+                                        label: 'matthew-jacobson'
+                                    },
+                                    {
+                                        route: 'teaching/at/yale/for/michael-denning', 
+                                        label: 'michael-denning'
+                                    },
+                                    {
+                                        route: 'teaching/at/yale/for/matthew-jacobson', 
+                                        label: 'vincent-scully'
+                                    }
+                                ]
                             }
                         ]
                     }

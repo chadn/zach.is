@@ -138,6 +138,10 @@ Z.go = function(initialRoute) {
             $('#mainContent').attr('src', '//zach.is/frames/not/finding/this/page');
           }
           $('#progress').css('opacity', 1);
+          var theLoad = '/' + currentRoute + ' #contents';
+          console.log(theLoad);
+          // $('#explanation').load('/' + currentRoute + ' #explanation');
+          $('#explanation').load(theLoad);
           $('iframe').load(function() {
             // console.log('iframe loaded!');
             $('#progress').css('opacity', 0);
