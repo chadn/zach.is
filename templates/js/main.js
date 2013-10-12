@@ -152,7 +152,7 @@ Z.go = function(initialRoute) {
           if (launchRoute.length > 0) {
             selectItem(1, launchRoute[0]);
           }
-        }, 150);
+        }, 250);
       },
       focus: function(e, ui) {
         return false; // this will prevent the placeholder from being populated with the focused item
