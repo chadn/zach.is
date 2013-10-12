@@ -3,77 +3,73 @@ body {
   margin: 0;
   padding: 0;
 }
-
 form {
-  /*padding: 14px 0 0 88px;*/
   position: relative;
   top: 20px;
   left: 20px;
 }
-
-label, input, #progress, ul, li {
+label,
+input,
+#progress,
+ul,
+li {
   line-height: 32px;
 }
-
 #behindForm {
   position: fixed;
   width: 100%;
   /*height: 52px;*/
+
   height: 64px;
   display: block;
   /*background-color: #fff;*/
+
   z-index: -1;
 }
-
+#inputHolder {
+  margin-left: 48px;
+}
 #inputBG {
   padding: 16px 0 10px 21px;
-  background-color: rgba(255,255,255,.9);
+  background-color: rgba(255, 255, 255, 0.9);
 }
-
-  /*height: 80px;*/
-  /*background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));*/
-  /*background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));*/
-  /*background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));*/
-  /*background: -o-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));*/ 
-
-#guided {
+/*height: 80px;*/
+/*background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));*/
+/*background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));*/
+/*background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));*/
+/*background: -o-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));*/#guided {
   position: absolute;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 12px;
   right: 72px;
-  top: 18px;
+  top: -2px;
 }
-
 #guided a {
   text-decoration: none;
   font-family: 'Sentinel SSm A', 'Sentinel SSm B' !important;
   color: black;
 }
-
 #guided a:hover {
   border-bottom: 1px solid black;
 }
-
 #guided a.disabled {
   color: #bbb;
   cursor: default;
 }
-
 #guided a.disabled:hover {
   color: #bbb;
   cursor: default;
   border-bottom: none;
 }
-
 #tags-label {
   font-size: 12px !important;
   font-weight: 700;
   padding-right: 16px;
 }
-
 #tags-label span {
   font-size: 13px !important;
   font-weight: 500;
 }
-
 iframe {
   position: absolute;
   width: 100%;
@@ -82,33 +78,28 @@ iframe {
   z-index: -10;
   border: none;
   opacity: 0;
-  transition: opacity .25s ease-in-out;
-  -moz-transition: opacity .25s ease-in-out;
-  -webkit-transition: opacity .25s ease-in-out;
+  transition: opacity 0.25s ease-in-out;
+  -moz-transition: opacity 0.25s ease-in-out;
+  -webkit-transition: opacity 0.25s ease-in-out;
 }
-
-ui-widget {
-	position: relative;
-	left: 100px;
-	top: 20px;
-}
-label, input, .ui-autocomplete, #hiddenInput, #progress {
+label,
+input,
+.ui-autocomplete,
+#hiddenInput,
+#progress {
   font-family: 'Sentinel SSm A', 'Sentinel SSm B' !important;
   font-weight: 700;
   font-style: normal;
   font-size: 26px !important;
   border: none;
   z-index: -1;
-  box-sizing:border-box;
-  -moz-box-sizing:border-box; /* Firefox */
-  /*pointer-events: none;*/
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  /* Firefox */
+
 }
 .ui-autocomplete li a {
   color: #bbb;
-}
-.ui-autocomplete {
-  /*top: 4px !important;*/
-  /*left: 154px !important;*/
 }
 .ui-state-focus {
   border: none !important;
@@ -116,7 +107,6 @@ label, input, .ui-autocomplete, #hiddenInput, #progress {
   color: #000 !important;
   margin: 0;
 }
-
 .ui-menu {
   margin: 0;
   padding: 0;
@@ -126,76 +116,72 @@ label, input, .ui-autocomplete, #hiddenInput, #progress {
 .ui-menu-item {
   height: 32px;
 }
-
 .ui-menu-item span {
-  /*color: transparent !important;*/
   color: black !important;
 }
-
 input {
   outline: none;
-  /*border: 1px solid red;*/
-  background: rgba(0,0,0,0);
+  background: rgba(0, 0, 0, 0);
   font-weight: normal;
   padding: 0;
   margin-left: -4px;
-  /*position: absolute;*/
-  /*z-index: 99999;*/
 }
-
-input:last-child {
-
+#progress {
+  color: #bbb;
+  display: inline-block;
+  -webkit-transition: opacity 0.15s ease-in-out;
+  opacity: 0;
 }
-
-#progress 
-{
-    color: #bbb;
-    /*font-size: 18px;*/
-    /*margin: 80px auto;*/
-    /*width: 200px;*/
-    display: inline-block;
-    -webkit-transition: opacity 0.15s ease-in-out;
-    opacity: 0;
-}
-
 #progress ul {
   margin: 0;
   padding: 0;
   line-height: 16px;
   font-weight: 500;
 }
-
-.msg {
-    display: inline-block;
+#progress .msg {
+  display: inline-block;
 }
-
 .dot {
-    display: inline-block;
-    border-radius: 1px;
-    background-color: #bbb;
-    -webkit-animation: dot 1.5s infinite;
-    margin-right: 4px;
+  display: inline-block;
+  border-radius: 1px;
+  background-color: #bbb;
+  -webkit-animation: dot 1.5s infinite;
+  margin-right: 4px;
 }
-
 .one {
-    -webkit-animation-delay: 0.0s;
+  -webkit-animation-delay: 0.0s;
 }
-
 .two {
-    -webkit-animation-delay: 0.5s;
+  -webkit-animation-delay: 0.5s;
 }
-
 .three {
-    -webkit-animation-delay: 1.0s;
+  -webkit-animation-delay: 1.0s;
 }
-
 @-webkit-keyframes dot {
-     0% { width: 3px; height: 3px; margin-right: 3px; }
-    25% { width: 4px; height: 4px; margin-right: 2px; }
-    33% { width: 3px; height: 3px; margin-right: 3px; }
-   100% { width: 3px; height: 3px; margin-right: 3px; }
+  0% {
+    width: 3px;
+    height: 3px;
+    margin-right: 3px;
+  }
+  25% {
+    width: 4px;
+    height: 4px;
+    margin-right: 2px;
+  }
+  33% {
+    width: 3px;
+    height: 3px;
+    margin-right: 3px;
+  }
+  100% {
+    width: 3px;
+    height: 3px;
+    margin-right: 3px;
+  }
 }
-
+li {
+  list-style: none;
+}
 /* Layout helpers
 ----------------------------------*/
 .ui-helper-hidden {
@@ -231,7 +217,9 @@ input:last-child {
   clear: both;
 }
 .ui-helper-clearfix {
-  min-height: 0; /* support: IE7 */
+  min-height: 0;
+  /* support: IE7 */
+
 }
 .ui-helper-zfix {
   width: 100%;
@@ -240,27 +228,14 @@ input:last-child {
   left: 0;
   position: absolute;
   opacity: 0;
-  filter:Alpha(Opacity=0);
+  filter: alpha(opacity=0);
 }
-
 .ui-front {
   z-index: 100;
 }
-
 .ui-menu-item a {
   font-weight: 400;
   cursor: default;
   /*background-color: white;*/
-}
 
-
-li {
-  list-style: none;
-/*  float: left;
-  position: relative;
-  top: 0;
-  margin: 1px .2em 0 0;
-  border-bottom-width: 0;
-  padding: 0;
-  white-space: nowrap;*/
 }
