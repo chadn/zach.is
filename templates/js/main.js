@@ -211,6 +211,7 @@ Z.go = function(initialRoute) {
     console.log('First!');
     $(this).css('display','none');
     $('#prev-next').css('display','block');
+    Routes.tourRoutes = _.shuffle(Routes.tourRoutes);
     launchRoute = makeLaunchRoute(Routes.tourRoutes[linkPosition]);
     linkPosition = linkPosition + 1;
     $('#1').focus();

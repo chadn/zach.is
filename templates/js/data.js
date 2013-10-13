@@ -40,6 +40,9 @@ Routes.usableRoutes = {
     'on/instagram/' : {
         'more-info' : true
     },
+    'on/linkedin/' : {
+        'more-info' : false
+    },
     'wearing/lots/of/hats/' : {
         'more-info' : true
     },
@@ -70,6 +73,9 @@ Routes.usableRoutes = {
     'building/skyscrapers/' : {
         'more-info' : true
     },
+    'building/a/hovercraft/' : {
+        'more-info' : false
+    },
     'teaching/at/yale/for/david-blight/' : {
         'more-info' : true
     },
@@ -90,8 +96,13 @@ Routes.usableRoutes = {
     },
     'teaching/at/yale/for/vincent-scully/' : {
         'more-info' : true
+    },
+    'drawing/in/rome/' : {
+        'more-info' : true
+    },
+    'printing/in/3d/' : {
+        'more-info' : true
     }
-    // 'drawing/in/rome/'
 }
 
 Routes.tourRoutes = [
@@ -100,13 +111,15 @@ Routes.tourRoutes = [
     'wearing/lots/of/hats/',
     'working/at/pinterest/on/metadata/',
     'making/gifs/',
+    'drawing/in/rome/',
+    'printing/in/3d/',
     'making/simple-shapes/',
     'reading/wired/',
     'disappointed/with/the/government/',
     'flying/',
     'working/for/robert-rauschenberg/',
     'using/lots/of/tools/',
-    'building/skyscrapers/',
+    'building/skyscrapers/'
 ]
 
 Routes.routes = [
@@ -237,6 +250,16 @@ Routes.routes = [
             {
                 route: 'building/skyscrapers/',
                 label: 'skyscrapers',
+            },
+            {
+                route: 'building/a/',
+                label: 'a',
+                children: [
+                    {
+                        route: 'building/a/hovercraft/',
+                        label: 'hovercraft'                        
+                    }
+                ]
             }
         ]
     },
@@ -511,6 +534,10 @@ Routes.routes = [
             {
                 route: 'on/facebook', 
                 label: 'facebook'
+            },
+            {
+                route: 'on/linkedin', 
+                label: 'linkedin'
             }
         ]
     },
@@ -537,16 +564,40 @@ Routes.routes = [
         ]
     },
     {
-        route: 'on-top-of/',
-        label: 'on-top-of'
+        route: 'drawing/',
+        label: 'drawing',
+        children: [
+            {
+                route: 'drawing/in/',
+                label: 'in',
+                children: [
+                    {
+                        route: 'drawing/in/rome/',
+                        label: 'rome'
+                    }
+                ]
+            }
+        ]
     },
     {
         route: 'cooking/',
         label: 'cooking'
     },
     {
-        route: 'pinning/',
-        label: 'pinning'
+        route: 'printing/',
+        label: 'printing',
+        children: [
+            {
+                route: 'printing/in/',
+                label: 'in',
+                children: [
+                    {
+                        route: 'printing/in/3d/',
+                        label: '3d'
+                    }
+                ]
+            }
+        ]
     },
     {
         route: 'instagramming/',
