@@ -1,0 +1,7 @@
+
+javascript todo:
+
++ generate a routes.js that will contain meta info for routes, based on index.json files in contents (like personal tags and webring info)
+- stop using data.js, replace with routes.js
+- pushstate (https://github.com/browserstate/history.js)
+- webring next/prev

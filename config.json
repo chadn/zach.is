@@ -7,6 +7,12 @@
 		"port": 9009
 	},
 
+    "plugins": {
+        "generator_hooks": {
+            "custom_hook": "create_json" 
+        }
+    },
+
 	"bundles": {
 		"/css/all.css": [
 			"/css/normalize.css",	
